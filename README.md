@@ -5,7 +5,7 @@ This script batch converts videos from `/sdcard/Download/HighS/` to **240p resol
 ## 🔧 Usage (Termux)
 ```bash
 pkg install git ffmpeg -y
-git clone https://github.com/Piyash-ORG/ffmpeg-convert-240p.git
+git clone https://github.com/jiocreator/ffmpeg-convert-240p.git
 cd ffmpeg-convert-240p
 chmod +x convert.sh
 ./convert.sh
