@@ -1,7 +1,7 @@
 # 🎥 FFmpeg Video Converter (Termux)
 
 A tiny **interactive FFmpeg converter script** for Termux (Android).  
-Quickly convert a whole folder of videos to chosen resolution + codec while preserving filenames.
+Quickly convert a folder of videos to chosen resolution + codec while preserving filenames.
 
 ---
 
@@ -10,7 +10,6 @@ Quickly convert a whole folder of videos to chosen resolution + codec while pres
 - Saves outputs to: **`/sdcard/Documents/Ffmpeg_Converted/`**  
 - Skips already-converted files (same filename)  
 - Uses **MPEG4** for 240p (retro / low-end), **H.264 (libx264)** for higher qualities  
-- Simple, one-command install & run
 
 ---
 
@@ -18,8 +17,7 @@ Quickly convert a whole folder of videos to chosen resolution + codec while pres
 - Termux (Android)
 - FFmpeg installed in Termux
 
-Install FFmpeg:
-
+Install FFmpeg (Copy button enabled):
 ```bash
 pkg update && pkg upgrade -y
 pkg install ffmpeg -y
@@ -27,17 +25,14 @@ pkg install ffmpeg -y
 
 ---
 
-📥 One-line Clone & Run (one-tap copy)
+📥 One-line Clone & Run
 
 git clone https://github.com/Piyash-ORG/ffmpeg-video-converter.git
 cd ffmpeg-video-converter
 chmod +x convert.sh
 ./convert.sh
 
-> Only these commands have Copy button on GitHub for easy one-tap usage.
-
-
-
+> Only these commands have Copy buttons for usage.
 
 ---
 
@@ -45,14 +40,10 @@ chmod +x convert.sh
 
 When you run ./convert.sh the script will ask:
 
-1. Input folder path — e.g. /sdcard/Download/HighS
-
-
+1. Input folder path — e.g. /sdcard/Download/HighS  
 2. Quality option — choose number (1–5)
 
-
-
-Options shown:
+Example (non-copyable):
 
 Select quality option:
 1) 240p (MPEG4)
@@ -65,12 +56,11 @@ Converted files saved to:
 
 /sdcard/Documents/Ffmpeg_Converted/
 
-
 ---
 
-🎚 Quality Settings
+🎚 Quality Settings (non-copyable)
 
-#	Name	Resolution	Video codec	Video bitrate / mode	Audio	Notes
+#	Name	Resolution	Video codec	Video bitrate	Audio	Notes
 
 1	240p (MPEG4)	320×240	mpeg4	350k	AAC 96k	Low-end devices
 2	360p (H.264)	480×360	libx264	600k	AAC 96k	Phones / low bandwidth
@@ -79,14 +69,10 @@ Converted files saved to:
 5	1080p FHD (H.264)	1920×1080	libx264	5000k	AAC 192k	High quality FHD
 
 
-> Note: Tables and explanations do not have Copy buttons, only real commands do.
-
-
-
 
 ---
 
-⚙️ Script behaviour & notes
+⚙️ Script Behaviour & Notes (non-copyable)
 
 Original filenames preserved. Already converted files skipped.
 
@@ -100,7 +86,7 @@ Uses -preset ultrafast for speed. You can edit convert.sh for better compression
 
 ---
 
-❗ Troubleshooting
+❗ Troubleshooting (non-copyable)
 
 Permission denied on /sdcard → run:
 
