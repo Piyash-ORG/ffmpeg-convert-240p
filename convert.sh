@@ -8,7 +8,7 @@ mkdir -p "$OUTPUT_DIR"
 EXAMPLE_INPUT="/sdcard/Download/video.mp4"
 
 echo "Example input file: $EXAMPLE_INPUT"
-read -p "Enter input file path (file or folder): " INPUT_PATH
+read -p "Enter input file or folder path (or leave blank to use example): " INPUT_PATH
 INPUT_PATH=${INPUT_PATH:-$EXAMPLE_INPUT}
 
 # Download temporary cover image for album art
@@ -88,8 +88,10 @@ for file in "${files[@]}"; do
           echo "Skipping already converted audio: ${name_noext}.mp3"
       else
           echo "Extracting audio-only with album art ($ABIT): ${name_noext}.mp3"
-          ffmpeg -i "$file" -vn -i "$COVER_FILE" -map 0:a -map 1 \
-            -c:a libmp3lame -b:a $ABIT -id3v2_version 3 "$output_audio"
+          ffmpeg -i "$file" -vn -i "$COVER_FILE" \
+            -map 0:a -map 1 -c:a libmp3lame -b:a $ABIT \
+            -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover" \
+            -disposition:v attached_pic "$output_audio"
       fi
 
   else
@@ -98,8 +100,10 @@ for file in "${files[@]}"; do
           echo "Skipping already converted audio: ${name_noext}.mp3"
       else
           echo "Converting audio-only MP3 with album art ($ABIT): ${name_noext}.mp3"
-          ffmpeg -i "$file" -vn -i "$COVER_FILE" -map 0:a -map 1 \
-            -c:a libmp3lame -b:a $ABIT -id3v2_version 3 "$output_audio"
+          ffmpeg -i "$file" -vn -i "$COVER_FILE" \
+            -map 0:a -map 1 -c:a libmp3lame -b:a $ABIT \
+            -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover" \
+            -disposition:v attached_pic "$output_audio"
       fi
   fi
 
