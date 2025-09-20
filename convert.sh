@@ -4,8 +4,8 @@
 OUTPUT_DIR="/sdcard/Documents/Ffmpeg_Converted"
 mkdir -p "$OUTPUT_DIR"
 
-# Ask input folder
-read -p "Enter input folder path (e.g., /sdcard/Download/HighS): " INPUT_DIR
+# Ask input path (file or folder)
+read -p "Enter input file or folder path (e.g., /sdcard/Download/HighS or /sdcard/Download/video.mp4): " INPUT_PATH
 
 # Ask quality option
 echo "Select quality option:"
@@ -58,8 +58,23 @@ case $choice in
     ;;
 esac
 
+# Prepare files array
+if [ -f "$INPUT_PATH" ]; then
+    # Single file
+    files=("$INPUT_PATH")
+elif [ -d "$INPUT_PATH" ]; then
+    # Folder
+    files=("$INPUT_PATH"/*)
+else
+    echo "Error: $INPUT_PATH not found!"
+    exit 1
+fi
+
 # Conversion loop
-for file in "$INPUT_DIR"/*; do
+for file in "${files[@]}"; do
+  # Skip if not a file
+  [ ! -f "$file" ] && continue
+
   filename=$(basename "$file")
   output="$OUTPUT_DIR/$filename"
 
