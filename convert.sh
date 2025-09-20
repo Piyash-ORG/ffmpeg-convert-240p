@@ -11,10 +11,18 @@ echo "Example input file: $EXAMPLE_INPUT"
 read -p "Enter input file or folder path (or leave blank to use example): " INPUT_PATH
 INPUT_PATH=${INPUT_PATH:-$EXAMPLE_INPUT}
 
-# Download temporary cover image for album art
-COVER_URL="https://i.ibb.co.com/21TLbNbV/org-thum-s2.png"
-COVER_FILE="/data/data/com.termux/files/usr/tmp_cover.png"
-curl -s -L "$COVER_URL" -o "$COVER_FILE"
+# Permanent cover image path
+COVER_FILE="/data/data/com.termux/files/usr/cover.png"
+
+# Download cover image only if it doesn't exist
+if [ ! -f "$COVER_FILE" ]; then
+    echo "Downloading permanent cover image..."
+    curl -s -L "https://i.ibb.co.com/21TLbNbV/org-thum-s2.png" -o "$COVER_FILE"
+    if [ ! -f "$COVER_FILE" ]; then
+        echo "Error: Failed to download cover image!"
+        exit 1
+    fi
+fi
 
 # Show menu
 echo "Select conversion option:"
@@ -108,8 +116,5 @@ for file in "${files[@]}"; do
   fi
 
 done
-
-# Remove temporary cover
-rm -f "$COVER_FILE"
 
 echo "✅ Conversion finished! Files saved in: $OUTPUT_DIR"
