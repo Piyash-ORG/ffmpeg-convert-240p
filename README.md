@@ -19,6 +19,7 @@ Quickly convert a whole folder of videos to chosen resolution + codec while pres
 - FFmpeg installed in Termux
 
 Install FFmpeg:
+
 ```bash
 pkg update && pkg upgrade -y
 pkg install ffmpeg -y
@@ -26,17 +27,16 @@ pkg install ffmpeg -y
 
 ---
 
-📥 One-line Clone & Run (one-tap copy on GitHub)
+📥 One-line Clone & Run (one-tap copy)
 
-On GitHub the code block below shows a Copy button — click it to copy the whole command and run in Termux:
-
-git clone https://github.com/Piyash-ORG/ffmpeg-video-converter.git \
-&& cd ffmpeg-video-converter \
-&& chmod +x convert.sh
-
-Then run:
-
+git clone https://github.com/Piyash-ORG/ffmpeg-video-converter.git
+cd ffmpeg-video-converter
+chmod +x convert.sh
 ./convert.sh
+
+> Only these commands have Copy button on GitHub for easy one-tap usage.
+
+
 
 
 ---
@@ -68,18 +68,18 @@ Converted files saved to:
 
 ---
 
-🎚 Improved Quality Settings (recommended)
+🎚 Quality Settings
 
 #	Name	Resolution	Video codec	Video bitrate / mode	Audio	Notes
 
-1	240p (MPEG4)	320×240	mpeg4	-b:v 350k	AAC 96k	Best for very small file size / old devices
-2	360p (H.264)	480×360	libx264	-b:v 600k (or use -crf 28)	AAC 96k	Good for phones, low bandwidth
-3	480p (H.264)	854×480	libx264	-b:v 1000k (or -crf 26)	AAC 128k	Standard web/mobile
-4	720p HD (H.264)	1280×720	libx264	-b:v 2500k (or -crf 23)	AAC 128k	Good balance quality / size
-5	1080p FHD (H.264)	1920×1080	libx264	-b:v 5000k (or -crf 20)	AAC 192k	High quality FHD output
+1	240p (MPEG4)	320×240	mpeg4	350k	AAC 96k	Low-end devices
+2	360p (H.264)	480×360	libx264	600k	AAC 96k	Phones / low bandwidth
+3	480p (H.264)	854×480	libx264	1000k	AAC 128k	Standard web/mobile
+4	720p HD (H.264)	1280×720	libx264	2500k	AAC 128k	Good quality
+5	1080p FHD (H.264)	1920×1080	libx264	5000k	AAC 192k	High quality FHD
 
 
-> Tip: For libx264 you can remove -b:v and use -crf <value> + -preset <preset> for quality-based control (lower crf → better quality). The script uses bitrate targets for simplicity.
+> Note: Tables and explanations do not have Copy buttons, only real commands do.
 
 
 
@@ -88,29 +88,13 @@ Converted files saved to:
 
 ⚙️ Script behaviour & notes
 
-The script preserves the original filename. If a file with the same name already exists in the output folder, it is skipped.
+Original filenames preserved. Already converted files skipped.
 
-240p uses mpeg4 codec as requested; other qualities use libx264.
+240p uses mpeg4, higher resolutions use libx264.
 
-Audio is encoded to AAC with reasonable bitrates per resolution.
+Audio is AAC. Bitrate depends on resolution.
 
-The script sets -preset ultrafast so conversion is faster (but larger). You can edit convert.sh and change -preset to superfast / medium etc. to improve compression at the cost of CPU time.
-
-
-
----
-
-🔧 Quick customization pointers
-
-Change output folder:
-
-OUTPUT_DIR="/sdcard/Documents/Ffmpeg_Converted"
-
-Switch H.264 mode to CRF-based (better quality control), replace -b:v $VBIT with:
-
--crf 23 -preset medium
-
-If your source contains subtitle streams and you want to copy them, add -c:s copy to the ffmpeg command.
+Uses -preset ultrafast for speed. You can edit convert.sh for better compression (-preset medium) or CRF-based control.
 
 
 
@@ -118,13 +102,11 @@ If your source contains subtitle streams and you want to copy them, add -c:s cop
 
 ❗ Troubleshooting
 
-Permission denied on /sdcard paths: make sure Termux has storage permission:
+Permission denied on /sdcard → run:
+
 
 termux-setup-storage
 
-Then re-open Termux and retry.
+ffmpeg: command not found → install ffmpeg in Termux.
 
-ffmpeg: command not found → install ffmpeg in Termux (see Requirements).
-
-If output files are corrupt or fail to play, try changing codec/preset or use -c:v copy to skip re-encoding.
 
