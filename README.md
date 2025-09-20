@@ -32,7 +32,7 @@ cd ffmpeg-video-converter
 chmod +x convert.sh
 ./convert.sh
 
-> Only these commands have Copy buttons for usage.
+> Only these commands have Copy for usage in Terumx.
 
 ---
 
@@ -65,8 +65,8 @@ Converted files saved to:
 1	240p (MPEG4)	320×240	mpeg4	350k	AAC 96k	Low-end devices
 2	360p (H.264)	480×360	libx264	600k	AAC 96k	Phones / low bandwidth
 3	480p (H.264)	854×480	libx264	1000k	AAC 128k	Standard web/mobile
-4	720p HD (H.264)	1280×720	libx264	2500k	AAC 128k	Good quality
-5	1080p FHD (H.264)	1920×1080	libx264	5000k	AAC 192k	High quality FHD
+4	720p (H.264)	1280×720	libx264	2500k	AAC 128k	Good quality
+5	1080p (H.264)	1920×1080	libx264	5000k	AAC 192k	High quality FHD
 
 
 
